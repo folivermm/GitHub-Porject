@@ -10,28 +10,27 @@ function getDishById(req, res, next) {
         res.locals.dish = foundDish;
         next();
     } else {
-        next({ status: 404, message: `dish does net exist ${dishId}` })
+        next({ status: 404, message: `dish does net exist ${dishId}` });
     }
-
 }
 
 //middlware for validading dishes properties
 function validateDish(req, res, next) {
     const { data: { name, description, price, image_url } = {} } = req.body;
     if (!name || name === "") {
-        next({ status: 400, message: "Dish must include a name" })
+        next({ status: 400, message: "Dish must include a name" });
     }
     if (!description || description === "") {
-        next({ status: 400, message: "Dish must include a description" })
+        next({ status: 400, message: "Dish must include a description" });
     }
     if (!price) {
-        next({ status: 400, message: "Dish must include a price" })
+        next({ status: 400, message: "Dish must include a price" });
     }
     if (price <= 0 || !Number.isInteger(price)) {
-        next({ status: 400, message: "Dish must have a price that is an integer greater than 0" })
+        next({ status: 400, message: "Dish must have a price that is an integer greater than 0" });
     }
     if (!image_url || image_url === "") {
-        next({ status: 400, message: "Dish must include a image_url" })
+        next({ status: 400, message: "Dish must include a image_url" });
     }
     next();
 }
@@ -76,8 +75,9 @@ function update(req, res, next) {
 }
 
 function list(req, res, next) {
-    res.json({ data: dishes })
+    res.json({ data: dishes });
 }
+
 module.exports = {
     list,
     create: [validateDish, create],
