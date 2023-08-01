@@ -14,7 +14,18 @@ function getDishById(req, res, next) {
     }
 }
 
-//middlware for validading dishes properties
+//middleware to check dish id matches route id 
+function dishIdMatch(req, res, next) {
+    if (!req.body.data.id) {
+        next();
+    }
+    if (req.body.data.id !== req.params.dishId) {
+        next({ status: 400, message: `Dish id: ${req.body.data.id} does not match route id: ${req.params.dishId}` });
+    }
+    next();
+}
+
+//middlware to validade dishes properties
 function validateDish(req, res, next) {
     const { data: { name, description, price, image_url } = {} } = req.body;
     if (!name || name === "") {
@@ -31,17 +42,6 @@ function validateDish(req, res, next) {
     }
     if (!image_url || image_url === "") {
         next({ status: 400, message: "Dish must include a image_url" });
-    }
-    next();
-}
-
-//middleware to check dish id matches route id 
-function dishIdMatch(req, res, next) {
-    if (!req.body.data.id) {
-        next();
-    }
-    if (req.body.data.id !== req.params.dishId) {
-        next({ status: 400, message: `Dish id: ${req.body.data.id} does not match route id: ${req.params.dishId}` });
     }
     next();
 }
