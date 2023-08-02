@@ -26,24 +26,49 @@ function dishIdMatch(req, res, next) {
 }
 
 //middlware to validade dishes properties
-function validateDish(req, res, next) {
-    const { data: { name, description, price, image_url } = {} } = req.body;
+function getDishName(req, res, next) {
+    const { data: { name } = {} } = req.body;
     if (!name || name === "") {
-        next({ status: 400, message: "Dish must include a name" });
+        next({ status: 400, message: 'Dish must include a name' });
+    } else {
+        next();
     }
+}
+
+function getDishDescription(req, res, next) {
+    const { data: { description } = {} } = req.body;
     if (!description || description === "") {
-        next({ status: 400, message: "Dish must include a description" });
+        next({ status: 400, message: 'Dish must include a description' });
+    } else {
+        next();
     }
+}
+
+function getDishPrice(req, res, next) {
+    const { data: { price } = {} } = req.body;
     if (!price) {
-        next({ status: 400, message: "Dish must include a price" });
+        next({ status: 400, message: 'Dish must include a price' });
+    } else {
+        next();
     }
+}
+
+function completeDishPrice(req, res, next) {
+    const { data: { price } = {} } = req.body;
     if (price <= 0 || !Number.isInteger(price)) {
-        next({ status: 400, message: "Dish must have a price that is an integer greater than 0" });
+        next({ status: 400, message: 'Dish must have a price that is an integer greater than 0' });
+    } else {
+        next();
     }
+}
+
+function getDishImage(req, res, next) {
+    const { data: { image_url } = {} } = req.body;
     if (!image_url || image_url === "") {
-        next({ status: 400, message: "Dish must include a image_url" });
+        next({ status: 400, message: 'Dish must include an image_url' });
+    } else {
+        next();
     }
-    next();
 }
 
 //route handlers create, read, update, list
@@ -80,7 +105,7 @@ function list(req, res, next) {
 
 module.exports = {
     list,
-    create: [validateDish, create],
+    create: [getDishName, getDishDescription, getDishPrice, completeDishPrice, getDishImage, create],
     read: [getDishById, read],
-    update: [getDishById, validateDish, dishIdMatch, update],
+    update: [getDishById, dishIdMatch, getDishName, getDishDescription, getDishPrice, completeDishPrice, getDishImage, update],
 }
