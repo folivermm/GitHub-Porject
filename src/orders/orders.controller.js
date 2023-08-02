@@ -29,35 +29,51 @@ function orderIdMatch(req, res, next) {
 }
 
 ////middlware to validadte order properties
-function validateOrder(req, res, next) {
-    const { data: { deliverTo, mobileNumber, dishes } = {} } = req.body;
-
+function deliverToExists(req, res, next) {
+    const { data: { deliverTo } = {} } = req.body;
     if (!deliverTo || deliverTo === "") {
         next({ status: 400, message: "Order must include a deliverTo" });
+    } else {
+        next()
     }
-
-    if (!mobileNumber || mobileNumber === "") {
-        next({ status: 400, message: "Order must include a mobileNumber" });
-    }
-
-    if (!dishes || !Array.isArray(dishes) || dishes.length <= 0) {
-        next({ status: 400, message: "Order must include at least one dish" });
-    }
-
-    const dishIndexNumber = dishes.findIndex((dish) => {
-        const { quantity } = dish;
-        return typeof quantity !== "number" || quantity <= 0 || quantity % 1 !== 0;
-    });
-
-    if (dishIndexNumber !== -1) {
-        next({
-            status: 400,
-            message: `Dish ${dishIndexNumber} must have a quantity that is a positive integer.`,
-        });
-    }
-    next();
 }
 
+function mobileNumberExists(req, res, next) {
+    const { data: { mobileNumber } = {} } = req.body;
+    if (!mobileNumber || mobileNumber === "") {
+        next({ status: 400, message: "Order must include a mobileNumber" });
+    } else {
+        next()
+    }
+}
+
+function dishesExists(req, res, next) {
+    const { data: { dishes } = {} } = req.body;
+    if (!dishes || !Array.isArray(dishes) || dishes.length <= 0) {
+        next({ status: 400, message: "Order must include at least one dish" });
+    } else {
+        next()
+    }
+}
+
+function dishIndexExists(req, res, next) {
+    const { data: { dishes } = {} } = req.body;
+    let invalidDishIndex = -1;
+    if (dishes && Array.isArray(dishes)) {
+        invalidDishIndex = dishes.findIndex((dish) => {
+            const { quantity } = dish;
+            return typeof quantity !== "number" || quantity <= 0 || quantity % 1 !== 0;
+        });
+    }
+    if (invalidDishIndex !== -1) {
+        next({
+            status: 400,
+            message: `Dish ${invalidDishIndex} must have a quantity that is a positive integer.`,
+        });
+    } else {
+        next();
+    }
+}
 //Route handler create
 function create(req, res, next) {
     const {
@@ -124,8 +140,9 @@ function list(req, res, next) {
 
 module.exports = {
     list,
-    create: [validateOrder, create],
+    create: [deliverToExists, mobileNumberExists, dishesExists, dishIndexExists, create],
     read: [orderExists, read],
-    update: [orderExists, validateOrder, checkUpdateStatus, orderIdMatch, update],
+    update: [orderExists, deliverToExists, mobileNumberExists, dishesExists, dishIndexExists, checkUpdateStatus, orderIdMatch, update],
     destroy: [orderExists, checkDestroyStatus, destroy],
 };
+
