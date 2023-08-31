@@ -1,124 +1,95 @@
+# Grub Dash Website Backend
 
-```
-GrubDash Project
-├─ .git
-│  ├─ COMMIT_EDITMSG
-│  ├─ config
-│  ├─ description
-│  ├─ HEAD
-│  ├─ hooks
-│  │  ├─ applypatch-msg.sample
-│  │  ├─ commit-msg.sample
-│  │  ├─ fsmonitor-watchman.sample
-│  │  ├─ post-update.sample
-│  │  ├─ pre-applypatch.sample
-│  │  ├─ pre-commit.sample
-│  │  ├─ pre-merge-commit.sample
-│  │  ├─ pre-push.sample
-│  │  ├─ pre-rebase.sample
-│  │  ├─ pre-receive.sample
-│  │  ├─ prepare-commit-msg.sample
-│  │  ├─ push-to-checkout.sample
-│  │  └─ update.sample
-│  ├─ index
-│  ├─ info
-│  │  └─ exclude
-│  ├─ logs
-│  │  ├─ HEAD
-│  │  └─ refs
-│  │     ├─ heads
-│  │     │  └─ main
-│  │     └─ remotes
-│  │        └─ origin
-│  │           └─ main
-│  ├─ objects
-│  │  ├─ 20
-│  │  │  └─ a367557999aeedf857c9feafabad808823a8be
-│  │  ├─ 22
-│  │  │  └─ 113ac00bd743b25ab703f61629f413422a6eee
-│  │  ├─ 30
-│  │  │  └─ 29887e47c5005fac2f0a11f6c2cd94ef90f090
-│  │  ├─ 32
-│  │  │  ├─ 02c142440553bf44205fb54eb7abcb1d11dd21
-│  │  │  └─ 3a851c1971586621d6fb7a32217b95aba19f32
-│  │  ├─ 3d
-│  │  │  └─ c2ddcb921b781fb4e62a832eacb234df63cd73
-│  │  ├─ 3e
-│  │  │  └─ 9d5365f02e6ab5b2dce74f2ffbe4a9596f23d2
-│  │  ├─ 3f
-│  │  │  └─ f9e562f827ee89f5c83f23778be1e20343daaf
-│  │  ├─ 42
-│  │  │  └─ 0cbc35b34b4d8ab21f72dc0c7d1e7d2e632523
-│  │  ├─ 43
-│  │  │  └─ e70c3b11bba76c6644be06034c32f7a0fd90c4
-│  │  ├─ 46
-│  │  │  └─ fd55db308b0b915ae818458c85f6d3b3fb1221
-│  │  ├─ 47
-│  │  │  └─ 56564072e5c6d38e04e26e2912fd7862eb666f
-│  │  ├─ 49
-│  │  │  └─ cf62f56cda6df197ee90ab7a68ce42cbf2e782
-│  │  ├─ 4b
-│  │  │  └─ 825dc642cb6eb9a060e54bf8d69288fbee4904
-│  │  ├─ 56
-│  │  │  └─ 13010e0bd077ef1a1e9a3e0783fdc501d6d8a4
-│  │  ├─ 5c
-│  │  │  └─ 4c917560fccf0a58e3935e184cd2695dae49b7
-│  │  ├─ 6d
-│  │  │  └─ 301a1e37cf7eea964a7d999cf406b2c460de74
-│  │  ├─ 7e
-│  │  │  └─ a47a6d16d23f317c02a2f9005dcc21c9996745
-│  │  ├─ 82
-│  │  │  └─ 109188bce65b29a0e4aaf8b67cf6c7ee8cdfca
-│  │  ├─ 85
-│  │  │  └─ 15aa5a574f6f26b62317e471ed1a5b01fba938
-│  │  ├─ 99
-│  │  │  └─ 6ac35e8fcf7657af5eaf9cc3218da7a54988c6
-│  │  ├─ b4
-│  │  │  └─ 4d3ebfae214fec6c14101d010f8d081b6c1ad8
-│  │  ├─ cc
-│  │  │  └─ a3b2264d616c15214457bb5b670eb99dcc53e1
-│  │  ├─ cf
-│  │  │  └─ 767581b3c5fb2140578661868d75f870e7d454
-│  │  ├─ d6
-│  │  │  ├─ 971946b735e237a30670dc4d66f6739b22cb1c
-│  │  │  └─ d1e5c2c3187b64d3649d8910fba2eeafa59123
-│  │  ├─ df
-│  │  │  └─ 0ca7d3e94535e84e80cadc378cf96e27ddc24a
-│  │  ├─ e2
-│  │  │  └─ 52641934fb0150d05dd7284f4569ec59a37ff5
-│  │  ├─ info
-│  │  └─ pack
-│  └─ refs
-│     ├─ heads
-│     │  └─ main
-│     ├─ remotes
-│     │  └─ origin
-│     │     └─ main
-│     └─ tags
-├─ .gitignore
-├─ package-lock.json
-├─ package.json
-├─ src
-│  ├─ app.js
-│  ├─ data
-│  │  ├─ dishes-data.js
-│  │  └─ orders-data.js
-│  ├─ dishes
-│  │  ├─ dishes.controller.js
-│  │  └─ dishes.router.js
-│  ├─ errors
-│  │  ├─ errorHandler.js
-│  │  ├─ methodNotAllowed.js
-│  │  └─ notFound.js
-│  ├─ orders
-│  │  ├─ orders.controller.js
-│  │  └─ orders.router.js
-│  ├─ server.js
-│  └─ utils
-│     └─ nextId.js
-└─ test
-   ├─ dishes-router.test.js
-   ├─ make-test-app.js
-   └─ orders-router.test.js
+## Introduction
 
-```
+This repository sets up an API and builds out specific routes so that frontend developers can demo some initial design ideas.
+
+## Features and Achievements
+
+- Used common middleware packages
+- Handled requests through routes
+- Accessed relevant information through route parameters
+- Built an API following RESTful design principles
+- Implemented custom middleware functions
+
+## Routes
+
+- **GET /dishes:** Responds with a list of all existing dish data.
+
+- **POST /dishes:** Saves a new dish and responds with the newly created dish.
+
+- **GET /dishes/:dishId:** Responds with the dish where id === :dishId or returns 404 if no matching dish is found.
+
+- **PUT /dishes/:dishId:** Updates the dish where id === :dishId or returns 404 if no matching dish is found.
+
+- **GET /orders:** Responds with a list of all existing order data.
+
+- **POST /orders:** Saves a new order and responds with the newly created order.
+
+- **GET /orders/:orderId:** Responds with the order where id === :orderId or returns 404 if no matching order is found.
+
+- **PUT /orders/:orderId:** Updates the order where id === :orderId or returns 404 if no matching order is found.
+
+- **DELETE /orders/:orderId:** Deletes the order where id === :orderId.
+
+- **Validation middleware:**
+	Created validation middleware to check ID’s existence before allowing GET, PUT, POST, and DELETE requests. 
+
+
+## Getting Started
+
+Follow these instructions to set up both the backend and frontend components of the Grub Dash Website. This ensures you experience the full functionality of the website.
+
+### Frontend Repository
+
+Check out the frontend repository and its README at: [starter-grub-dash-front-end](https://github.com/dakotawatkins/project-we-love-movies-frontend).
+
+1. **Install dependencies and start:**
+   - `npm install`
+   - `npm start`
+
+2. **Troubleshooting Frontend:**
+   If you encounter any issues while setting up the frontend, try the following step:
+   - `npm audit fix --force`
+
+3. **Set Up Environment:**
+   Create a `.env.development` file and add the following:
+   - `API_BASE_URL="http://localhost:5000"`
+
+4. **Run the build process:**
+   - `npm run build`
+
+### Backend Setup
+
+1. **Fork and Clone:**
+   Begin by forking and cloning this repository to your local machine.
+
+2. **Install Dependencies:**
+   Run the following command to install required dependencies:
+   - `npm install`
+
+3. **Set Up Environment:**
+   Create a `.env` file and add the following:
+   - `NODE_ENV="http://localhost:5000"`
+
+### Frontend and Backend Integration
+
+1. **Frontend Workspace:**
+   Open the frontend repository and add the backend repository as a workspace.
+
+2. **Terminal Windows:**
+   Open two terminal windows and navigate to the frontend and backend folders respectively.
+
+3. **Backend Terminal:**
+   In the backend terminal window, run:
+   - `npm start`
+
+4. **Frontend Terminal:**
+   In the frontend terminal window, run:
+   - `npx serve -s build --listen 3000`
+
+5. **Visit the Site:**
+   Open your web browser and visit the website at:
+   - [http://localhost:3000/](http://localhost:3000/)
+
+
