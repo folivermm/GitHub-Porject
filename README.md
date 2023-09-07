@@ -42,7 +42,7 @@ Follow these instructions to set up both the backend and frontend components of 
 
 ### Frontend Repository
 
-Check out the frontend repository and its README at: [starter-grub-dash-front-end](https://github.com/dakotawatkins/project-we-love-movies-frontend).
+Check out the frontend repository and its README at: [starter-grub-dash-front-end](https://github.com/folivermm/starter-grub-dash-front-end).
 
 1. **Install dependencies and start:**
    - `npm install`
